@@ -8,6 +8,10 @@ import torch
 from google import genai
 import tempfile
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # YOLO model
 model = YOLO('C:/Users/user/runs/detect/run200imgsAnd100epochs2/weights/best.pt')
@@ -19,7 +23,9 @@ sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
 predictor = SamPredictor(sam)
 
 # Gemini client
-API_KEY = "AIzaSyCQMrxPRQcH64P7u9nPhY9koIqSiZdmzv0"
+API_KEY = os.getenv("GEMINI_API_KEY")
+if not API_KEY:
+    raise ValueError("GEMINI_API_KEY is not set in environment variables!")
 client = genai.Client(api_key=API_KEY)
 
 # Global variable for storing an image
@@ -50,7 +56,11 @@ def process_shard_with_gemini(crop_img):
 3. Letters (A, B, L) may only appear at the beginning of a word.
 4. The result must contain exactly 3 words.
 5. Rarely, the text may include the characters '-', '\' or '/'.
-Return only the cleaned text that follows these constraints."""]
+
+Return only the final cleaned text that follows these constraints.
+Do not include any explanations, reasoning, markdown, or formatting.
+Return plain text only.
+"""]
         )
         return response.text
     finally:

@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Environment variables
+.env
+
+# Virtual Environment
+venv/
+ENV/
+
+# VS Code settings
+.vscode/
+
+# Model weights and large files
+*.pth
+*.pt
+*.h5
+*.hdf5
+*.pkl
+*.model
+
+# Logs
+*.log
+
+# Local development settings
+instance/
+.webassets-cache
+
+# Dataset files
+*.csv
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.tif
+*.tiff
